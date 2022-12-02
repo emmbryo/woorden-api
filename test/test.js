@@ -7,6 +7,8 @@ async function getWordInfo () {
     // console.log(data)
     const infoString = await word.getWordInfo()
     console.log(infoString)
+    const expressions = await word.getExpressions()
+    console.log(expressions);
 }
 
 getWordInfo()

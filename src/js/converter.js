@@ -7,7 +7,7 @@
 
 export class Converter {
 
-  convert(toBeConverted) {
+  convertWordInfo(toBeConverted) {
     const separatedValues =  this.separateKeysAndValues(toBeConverted)
     const wordInfoObject = this.toObject(separatedValues)
     return wordInfoObject

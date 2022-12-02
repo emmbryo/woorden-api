@@ -29,14 +29,23 @@ export class Word {
     }
 
     async getWordInfo () {
-      const response = await this.#getInfo()
-      const dom = this.#getDom(response)
+      const dom = await this.#getDom()
       const rawData = this.#getRawWordData(dom)
       const keysAndValues = this.#getKeysAndValues(rawData)
 
       const converter = new Converter()
-      const wordInfoObject = converter.convert(keysAndValues)
+      const wordInfoObject = converter.convertWordInfo(keysAndValues)
       return wordInfoObject 
+    }
+
+    async getExpressions () {
+      const dom = await this.#getDom()
+      return Array.from(dom.window.document.querySelectorAll('a[href^="http://www.onderwoorden.nl/intensiveringen"]')).map(element => element.textContent)
+    }
+
+    async #getDom () {
+      const response = await this.#getInfo()
+      return this.#getJsonDom(response)
     }
 
     #setUrl () {
@@ -57,18 +66,19 @@ export class Word {
       
     }
 
-    #getDom (rawData) {
-      // const rawData = await this.#getInfo()
+    #getJsonDom (rawData) {
       return new JSDOM(rawData)
     }
 
     #getRawWordData (dom) {
-      // const dom = await this.#getDom()
       return Array.from(dom.window.document.querySelectorAll('tbody td')).map(element => element.textContent)
     }
 
+    #getLinksForExpressions () {
+
+    }
+
     #getKeysAndValues (wordInfo) {
-      // const wordInfo = await this.#getRawWordData()
       const keysAndValues = []
       let placeHolder = ""
       let i = 0
