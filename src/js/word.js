@@ -40,16 +40,36 @@ export class Word {
 
     async getExpressions () {
       const dom = await this.#getDom()
-      return Array.from(dom.window.document.querySelectorAll('a[href^="http://www.onderwoorden.nl/intensiveringen"]')).map(element => element.textContent)
+      const expressions = this.#getRawExpressions(dom)
+
+      if (expressions.length == 0) {
+        //throw new Error(`woorden.org offers no expressions for the word ${this.word}`)
+        return `woorden.org offers no expressions for the word ${this.word}`
+      } else {
+        return expressions
+      }  
+    }
+
+    async getSynonyms () {
+      const dom = await this.#getDom()
+      const allLinksTextContent = this.#getLinksTextContent(dom)
+      const synonyms =  this.#sortOutSynonyms(allLinksTextContent)
+      if (synonyms.length == 0) {
+        // throw new Error(`woorden.org does not specify any synonyms for the word ${this.word}`)
+        return `woorden.org does not specify any synonyms for the word ${this.word}`
+      } else {
+        return synonyms
+      }
+    }
+
+    async getExpressionLinks () {
+      const dom = await this.#getDom()
+      return this.#getLinksForExpressions(dom)
     }
 
     async #getDom () {
       const response = await this.#getInfo()
       return this.#getJsonDom(response)
-    }
-
-    #setUrl () {
-      this.#url = 'https://woorden.org/woord/' + this.word
     }
 
     async #getInfo () {
@@ -66,6 +86,10 @@ export class Word {
       
     }
 
+    #setUrl () {
+      this.#url = 'https://woorden.org/woord/' + this.word
+    }
+
     #getJsonDom (rawData) {
       return new JSDOM(rawData)
     }
@@ -74,8 +98,26 @@ export class Word {
       return Array.from(dom.window.document.querySelectorAll('tbody td')).map(element => element.textContent)
     }
 
-    #getLinksForExpressions () {
+    #getRawExpressions (dom) {
+      return Array.from(dom.window.document.querySelectorAll('a[href^="http://www.onderwoorden.nl/intensiveringen"]')).map(element => element.textContent)
+    }
 
+    #getLinksForExpressions (dom) {
+      return Array.from(dom.window.document.querySelectorAll('a[href^="http://www.onderwoorden.nl/intensiveringen"]')).map(element => element.href)
+    }
+
+    #getLinksTextContent (dom) {
+      return Array.from(dom.window.document.querySelectorAll('a[href^="https://www.woorden.org/woord/')).map(element => element.textContent)
+    }
+
+    #sortOutSynonyms (toBeSorted) {
+      let i = 0
+      let synonyms = []
+      while (!toBeSorted[i].startsWith(this.word + ' ') && !toBeSorted[i].includes('(antoniem)')) {
+        synonyms.push(toBeSorted[i])
+        i++
+      }
+      return synonyms
     }
 
     #getKeysAndValues (wordInfo) {
