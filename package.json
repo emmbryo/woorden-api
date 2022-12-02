@@ -1,0 +1,22 @@
+{
+  "name": "woorden-api",
+  "version": "1.0.0",
+  "description": "api for woorden.org dictionary",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js"
+  },
+  "keywords": [
+    "woord",
+    "woorden",
+    "nederlands",
+    "taal"
+  ],
+  "author": "emmbryo",
+  "license": "MIT",
+  "dependencies": {
+    "jsdom": "^19.0.0"
+  }
+}
