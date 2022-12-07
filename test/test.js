@@ -1,6 +1,7 @@
 import { Word } from "../src/js/word.js"
 
-const word = new Word('groot')
+// const word = new Word('meervoudigepersoonlijkheidsstoornis')
+const word = new Word('springen')
 
 async function getWordInfo () {
 
@@ -17,6 +18,7 @@ async function getWordInfo () {
 
     const antonyms = await word.getAntonyms()
     console.log(antonyms)
+
 }
 
 getWordInfo()

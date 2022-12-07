@@ -6,23 +6,38 @@ An object of the class is initiated with the word of interest. The word needs to
 
 ## Methods
 
-### getWordInfo()
+<h3 style="color:#FFFF99">
+getWordInfo()
+</h3>
+
 The method returns an object with information about the word, with the following keys:
 - Uitspraak (pronunciacion)
+- Afbreekpatroon
 - Verbuigingen (Conjugations)
 - Vervoegingen ()
 - Voorbeeld (Example)
 - Voorbeelden (Examples)
 Not all of these are available for every word at woorden.org, so the siza of the returned object will differ between different words, depending on the number of keys found
 
-### getSynonyms()
+<h3 style="color:#FFFF99">
+getSynonyms()
+</h3>
 The method returns the synonyms of the word, if there are any available at woorden.org. If no synonyms can be found, the following message is returned: "woorden.org does not specify any synonyms for the word [word]."
 
-### getAntonyms()
+<h3 style="color:#FFFF99">
+getAntonyms()
+</h3>
 The method returns the antonyms of the word, if there are any available at woorden.org. If no antonyms can be found, the following message is returned: "woorden.org does not specify any antonyms for the word [word]."
 
-### getExpressions()
+<h3 style="color:#FFFF99">
+getExpressions()
+</h3>
 The method returns commonly used expressions containing the word, if there are any available at woorden.org. If no expressions can be found, the following message is returned: "woorden.org offers no expressions for the word [word]."
 
-### getExpressionLinks()
+<h3 style="color:#FFFF99">
+getExpressionLinks()
+</h3>
 The method returns an array containing links (urls) to the given expressions, if there are any available at woorden.org. If no expression links can be found, the following message is returned: "woorden.org offers no expression links for the word [word]."
+
+## Disclaimer
+This package has been testet for a variety of different words, but far from all words in the dutch language. Because of this, there is a risk that the underlying structure of woorden.org will not be 100% consistent for all the words and might affect the performance of the methods provided here.

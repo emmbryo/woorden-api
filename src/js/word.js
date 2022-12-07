@@ -42,7 +42,7 @@ export class Word {
       const dom = await this.#getDom()
       const expressions = this.#getRawExpressions(dom)
 
-      if (expressions.length == 0) {
+      if (expressions.length === 0) {
         return `woorden.org offers no expressions for the word ${this.word}.`
       } else {
         return expressions
@@ -53,7 +53,7 @@ export class Word {
       const dom = await this.#getDom()
       const allLinksTextContent = this.#getLinksTextContent(dom)
       const synonyms =  this.#sortOutSynonyms(allLinksTextContent)
-      if (synonyms.length == 0) {
+      if (synonyms.length === 0) {
         return `woorden.org does not specify any synonyms for the word ${this.word}.`
       } else {
         return synonyms
@@ -64,18 +64,18 @@ export class Word {
       const dom = await this.#getDom()
       const allLinksTextContent = this.#getLinksTextContent(dom)
       const antonyms =  this.#sortOutAntonyms(allLinksTextContent)
-      if (antonyms.length == 0) {
-        return `woorden.org does not specify any antonyms for the word ${this.word}.`
-      } else {
-        return antonyms
-      }
+        if (antonyms.length === 0) {
+          return `woorden.org does not specify any antonyms for the word ${this.word}.`
+        } else {
+          return antonyms
+        }
     }
 
     async getExpressionLinks () {
       const dom = await this.#getDom()
       const expressionLinks = this.#getLinksForExpressions(dom)
-      if (expressionLinks.length == 0) {
-        return `woorden.org offers no expressions for the word ${this.word}.`
+      if (expressionLinks.length === 0) {
+        return `woorden.org offers no expression links for the word ${this.word}.`
       } else {
         return expressionLinks
       }  
@@ -121,15 +121,25 @@ export class Word {
     }
 
     #getLinksTextContent (dom) {
-      return Array.from(dom.window.document.querySelectorAll('a[href^="https://www.woorden.org/woord/')).map(element => element.textContent)
+        const headLines = Array.from(dom.window.document.querySelectorAll('div[class^="divider')).map(element => element.textContent)
+        for (let i = 0; i < headLines.length; i++) {
+          if (headLines[i] === 'Synoniemen') {
+            return Array.from(dom.window.document.querySelectorAll('a[href^="https://www.woorden.org/woord/')).map(element => element.textContent)
+          } 
+        }
+      return []
     }
 
     #sortOutSynonyms (toBeSorted) {
       let i = 0
       let synonyms = []
-      while (!toBeSorted[i].startsWith(this.word + ' ') && !toBeSorted[i].includes('(antoniem)')) {
-        synonyms.push(toBeSorted[i])
-        i++
+      try {
+        while (!toBeSorted[i].startsWith(this.word + ' ') && !toBeSorted[i].includes('(antoniem)') && i < toBeSorted.length) {
+          synonyms.push(toBeSorted[i])
+          i++
+        }
+      } catch (error) {
+        return synonyms
       }
       return synonyms
     }
@@ -162,6 +172,14 @@ export class Word {
       keysAndValues.shift()
 
       return keysAndValues
+    }
+
+    #hasElements (toBeChecked) {
+      if (toBeChecked.length == 0) {
+        return false
+      } else {
+        return true
+      } 
     }
     
     set word (value) {

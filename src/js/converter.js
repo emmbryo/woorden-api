@@ -31,9 +31,34 @@ export class Converter {
       } else if (toBeSeparated[i].includes("Voorbeelden:")) {
         const keyVoorbeelden = toBeSeparated[i].split(/(:)/)
         separatedValues.push(keyVoorbeelden)
+      } else if (toBeSeparated[i].includes("Afbreekpatroon:")) {
+        const keyVoorbeelden = toBeSeparated[i].split(/(:)/)
+        separatedValues.push(keyVoorbeelden)
       }
     }
-    return separatedValues;
+    this.#checkForDuplicatedKeys(separatedValues)
+    this.#removeExcessCharacters(separatedValues)
+    return separatedValues
+  }
+
+  #checkForDuplicatedKeys (separatedValues) {
+    const indexOfKey = 0
+    const indexOfValue = 2
+    for (let i = 0; i < separatedValues.length - 1; i++) {
+      if (separatedValues[i][indexOfKey] === separatedValues[i + 1][indexOfKey]) {
+        separatedValues[i + 1][indexOfValue] = separatedValues[i + 1][indexOfValue] + separatedValues[i][indexOfValue].trim()
+      }
+    }
+  }
+
+  #removeExcessCharacters (separatedValues) {
+    const indexOfValue = 2
+    for (let i = 0; i < separatedValues.length; i++) {
+      separatedValues[i][indexOfValue] = separatedValues[i][indexOfValue].replaceAll('  ', ' ')
+      console.log(separatedValues[i][indexOfValue])
+      separatedValues[i][indexOfValue] = separatedValues[i][indexOfValue].replaceAll('`', '')
+      console.log(separatedValues[i][indexOfValue])
+    }
   }
 
   toObject (toBeConverted) {
@@ -54,7 +79,7 @@ export class Converter {
     objectAsStrings.push(stringHolderEnd)
 
     let objectAsString = objectAsStrings.join(",")
-
+    console.log(objectAsString)
     return JSON.parse(objectAsString)
   }
 
