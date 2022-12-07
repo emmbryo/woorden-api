@@ -1,6 +1,6 @@
 import { Word } from "../src/js/word.js"
 
-const word = new Word('god')
+const word = new Word('groot')
 
 async function getWordInfo () {
 
@@ -14,6 +14,9 @@ async function getWordInfo () {
 
     const synonyms = await word.getSynonyms()
     console.log(synonyms)
+
+    const antonyms = await word.getAntonyms()
+    console.log(antonyms)
 }
 
 getWordInfo()

@@ -43,8 +43,7 @@ export class Word {
       const expressions = this.#getRawExpressions(dom)
 
       if (expressions.length == 0) {
-        //throw new Error(`woorden.org offers no expressions for the word ${this.word}`)
-        return `woorden.org offers no expressions for the word ${this.word}`
+        return `woorden.org offers no expressions for the word ${this.word}.`
       } else {
         return expressions
       }  
@@ -55,16 +54,31 @@ export class Word {
       const allLinksTextContent = this.#getLinksTextContent(dom)
       const synonyms =  this.#sortOutSynonyms(allLinksTextContent)
       if (synonyms.length == 0) {
-        // throw new Error(`woorden.org does not specify any synonyms for the word ${this.word}`)
-        return `woorden.org does not specify any synonyms for the word ${this.word}`
+        return `woorden.org does not specify any synonyms for the word ${this.word}.`
       } else {
         return synonyms
       }
     }
 
+    async getAntonyms () {
+      const dom = await this.#getDom()
+      const allLinksTextContent = this.#getLinksTextContent(dom)
+      const antonyms =  this.#sortOutAntonyms(allLinksTextContent)
+      if (antonyms.length == 0) {
+        return `woorden.org does not specify any antonyms for the word ${this.word}.`
+      } else {
+        return antonyms
+      }
+    }
+
     async getExpressionLinks () {
       const dom = await this.#getDom()
-      return this.#getLinksForExpressions(dom)
+      const expressionLinks = this.#getLinksForExpressions(dom)
+      if (expressionLinks.length == 0) {
+        return `woorden.org offers no expressions for the word ${this.word}.`
+      } else {
+        return expressionLinks
+      }  
     }
 
     async #getDom () {
@@ -118,6 +132,16 @@ export class Word {
         i++
       }
       return synonyms
+    }
+
+    #sortOutAntonyms (toBeSorted) {
+      let antonyms = []
+      for (let i = 0; i < toBeSorted.length; i++) {
+        if (toBeSorted[i].includes('antoniem')) {
+          antonyms.push(toBeSorted[i].replace('(antoniem)', '').trim())
+        }
+      }
+      return antonyms
     }
 
     #getKeysAndValues (wordInfo) {
