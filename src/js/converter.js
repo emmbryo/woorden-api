@@ -41,6 +41,9 @@ export class Converter {
       } else if (toBeSeparated[i].includes("Afbreekpatroon:")) {
         const keyVoorbeelden = toBeSeparated[i].split(/(:)/)
         separatedValues.push(keyVoorbeelden)
+      } else if (toBeSeparated[i].includes("Antoniem:")) {
+        const keyVoorbeelden = toBeSeparated[i].split(/(:)/)
+        separatedValues.push(keyVoorbeelden)
       }
     }
     this.#checkForDuplicatedKeys(separatedValues)

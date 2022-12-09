@@ -1,27 +1,30 @@
 import { Word } from "../src/js/word.js"
 
 // const word = new Word('meervoudigepersoonlijkheidsstoornis')
-const word = new Word('paard')
+
+
+const word = new Word('belangrijk')
+
 
 async function getWordInfo () {
 
     const infoString = await word.getWordInfo()
     console.log(infoString)
 
-    const expressions =  await word.getExpressions()
+   /* const expressions =  await word.getExpressions()
     console.log(expressions)
 
     const expressionLinks = await word.getExpressionLinks()
-    console.log(expressionLinks)
+    console.log(expressionLinks)*/
 
-    const synonyms = await word.getSynonyms()
-    console.log(synonyms)
+    /*const synonyms = await word.getSynonyms()
+    console.log(synonyms)*/
 
     const antonyms = await word.getAntonyms()
     console.log(antonyms)
 
-    const synLinks = await word.getSynonymLinks()
-    console.log(synLinks)
+    /*const synLinks = await word.getSynonymLinks()
+    console.log(synLinks)*/
 
 }
 

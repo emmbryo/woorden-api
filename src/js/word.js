@@ -224,7 +224,7 @@ export class Word {
         throw new Error('Input must be a string')
       }
       if (value.length < 1 || value.length > 35) {
-        throw new RangeError('Input must between 1 and 35 characters long')
+        throw new RangeError('Input must be between 1 and 35 characters long')
       }
       this.#word = value
     }

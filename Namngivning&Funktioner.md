@@ -4,7 +4,7 @@
 <table border="1" cellpadding="5">
   <tr>
     <th>Namn och förklaring</th>
-    <th>reflektion och regler från Clean Code</th>
+    <th>Reflektion och regler från Clean Code</th>
   </tr>
   <tr>
     <td> <b>Converter</b><br>klassnamn på understödjande i modulen</td>
