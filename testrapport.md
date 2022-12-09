@@ -90,7 +90,7 @@ Should give the following result:
 The steps of comparison done in 2.1 are repeated for a list of different words, belonging to different categories. A successful test shows the same parameters as given on woorden.org. If a parameter for the word is not available at woorden.org, the method should return a message informing the user about this. This is also counted as a successful result.
 
 This includes the longest word in the dutch language; *meervoudigepersoonlijkheidsstoornis* (*eng. multiple personelity disorder*) and the shortest; *o* (*eng. oh*). Beyond these, a verb; *springen* (*eng. to jump*), a noun; *paard* (*eng. horse*); a preposition; *op*
-(*eng. on/in/up*) and an adjective; *groot* (*eng. big*) are randomly chosen to be tested.
+(*eng. on/in/up*) and an adjective; *groot* (*eng. big*) are chosen to be tested, on the basis of belonging to different categories.
 
 
 <table border="1" cellpadding="5">

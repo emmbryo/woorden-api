@@ -1,6 +1,8 @@
 # woorden-api 1.0.0
 
-This is an api for extracting information about a word from the dutch online dictionary woorden.org
+![woorden logo](/img/logo.png)
+
+This is an api for the dutch online dictionary woorden.org
 
 An object of the class is initiated with the word of interest. The word needs to be in dutch and it needs to be correctly spelled. The word cannot be longer than 35 characters, which is the length of the longest word in the dutch language; *meervoudigepersoonlijkheidsstoornis* (Which translates to multiple personality disorder).
 
@@ -12,6 +14,18 @@ The api works with asynchronous network calls and therefore needs to be executed
 In order to be able to scrape the fetched website for the right information a dom structure has been used. The generation of this dom structure is done using jsdom, an external dependency that needs to be installed in order for the package to work. More info on this package can be found here: https://www.npmjs.com/package/jsdom
 
 ## Example
+In order for the module to work, jsdom needs to be installed. It can either be added to the package.json file of the project and then included in the general npm install, or you can install is seperately by simply using the command:
+ 
+<h3 style="color:darkorange">npm i jsdom.</h3><br>
+
+In the code itself, the module makes use of asynchronous code and therefore needs to be executed in an asynchronous environment. It can for example be achieved with an async function, as in the following example:
+
+![example](/img/example_start.png)
+
+This code will result in the following print to the console:
+
+![belangrijk object](/img/belangrijk_objekt.jpeg)
+
 
 ## Methods
 

@@ -1,9 +1,7 @@
+// test code for all public methods for the Word class.
 import { Word } from "../src/js/word.js"
 
-// const word = new Word('meervoudigepersoonlijkheidsstoornis')
-
-
-const word = new Word('groot')
+const word = new Word('belangrijk')
 
 
 async function getWordInfo () {
