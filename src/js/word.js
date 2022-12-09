@@ -4,8 +4,8 @@
  * @author Emma Fransson <info@emmbryo.se>
  * @version 1.0.0
  */
-
 import { JSDOM } from "jsdom"
+
 import { Converter } from "./converter.js"
 
 export class Word {
@@ -28,6 +28,10 @@ export class Word {
       this.#setUrl()
     }
 
+    /**
+     * 
+     * @returns {object} Key-Value pairs with info about the word.
+     */
     async getWordInfo () {
       const dom = await this.#getDom()
       const rawData = this.#getRawWordData(dom)
@@ -38,47 +42,56 @@ export class Word {
       return wordInfoObject 
     }
 
+    /**
+     * 
+     * @returns {String[]} 
+     */
     async getExpressions () {
       const dom = await this.#getDom()
       const expressions = this.#getRawExpressions(dom)
+      const errorMessage = `woorden.org offers no expressions for the word ${this.word}.`
 
-      if (expressions.length === 0) {
-        return `woorden.org offers no expressions for the word ${this.word}.`
-      } else {
-        return expressions
-      }  
+      return this.#hasElements(expressions, errorMessage)
+
     }
 
     async getSynonyms () {
       const dom = await this.#getDom()
       const allLinksTextContent = this.#getLinksTextContent(dom)
       const synonyms =  this.#sortOutSynonyms(allLinksTextContent)
-      if (synonyms.length === 0) {
-        return `woorden.org does not specify any synonyms for the word ${this.word}.`
-      } else {
-        return synonyms
-      }
+      const errorMessage = `woorden.org does not specify any synonyms for the word ${this.word}.`
+
+      return this.#hasElements(synonyms, errorMessage)
     }
 
     async getAntonyms () {
       const dom = await this.#getDom()
       const allLinksTextContent = this.#getLinksTextContent(dom)
       const antonyms =  this.#sortOutAntonyms(allLinksTextContent)
-        if (antonyms.length === 0) {
-          return `woorden.org does not specify any antonyms for the word ${this.word}.`
-        } else {
-          return antonyms
-        }
+      const errorMessage = `woorden.org does not specify any antonyms for the word ${this.word}.`
+
+      return this.#hasElements(antonyms, errorMessage)
+
+    }
+
+    async getSynonymLinks () {
+      const dom = await this.#getDom()
+      const allLinksTextContent = this.#getLinksTextContent(dom)
+      const synonyms =  this.#sortOutSynonyms(allLinksTextContent)
+      const synonymLinks = synonyms.map(element => 'https://woorden.ord/woord/' + element)
+      const errorMessage = `woorden.org does not specify any synonym links for the word ${this.word}.`
+
+      return this.#hasElements(synonymLinks, errorMessage)
+
     }
 
     async getExpressionLinks () {
       const dom = await this.#getDom()
       const expressionLinks = this.#getLinksForExpressions(dom)
-      if (expressionLinks.length === 0) {
-        return `woorden.org offers no expression links for the word ${this.word}.`
-      } else {
-        return expressionLinks
-      }  
+      const errorMessage = `woorden.org offers no expression links for the word ${this.word}.`
+
+      return this.#hasElements(expressionLinks, errorMessage)
+
     }
 
     async #getDom () {
@@ -89,7 +102,7 @@ export class Word {
     async #getInfo () {
       try {
         const response = await fetch(this.url)
-        if (response.status === 200) {
+        if (response.ok) {
           return await response.text()
         } else {
           throw new Error('Something went wrong with the request.')
@@ -98,10 +111,6 @@ export class Word {
         console.log(error.message)
       }
       
-    }
-
-    #setUrl () {
-      this.#url = 'https://woorden.org/woord/' + this.word
     }
 
     #getJsonDom (rawData) {
@@ -121,12 +130,12 @@ export class Word {
     }
 
     #getLinksTextContent (dom) {
-        const headLines = Array.from(dom.window.document.querySelectorAll('div[class^="divider')).map(element => element.textContent)
-        for (let i = 0; i < headLines.length; i++) {
-          if (headLines[i] === 'Synoniemen') {
-            return Array.from(dom.window.document.querySelectorAll('a[href^="https://www.woorden.org/woord/')).map(element => element.textContent)
-          } 
-        }
+      const headLines = Array.from(dom.window.document.querySelectorAll('div[class^="divider')).map(element => element.textContent)
+      for (let i = 0; i < headLines.length; i++) {
+        if (headLines[i] === 'Synoniemen') {
+          return Array.from(dom.window.document.querySelectorAll('a[href^="https://www.woorden.org/woord/')).map(element => element.textContent)
+        } 
+      }
       return []
     }
 
@@ -174,12 +183,16 @@ export class Word {
       return keysAndValues
     }
 
-    #hasElements (toBeChecked) {
+    #hasElements (toBeChecked, errorMessage) {
       if (toBeChecked.length == 0) {
-        return false
+        return errorMessage
       } else {
-        return true
+        return toBeChecked
       } 
+    }
+
+    #setUrl () {
+      this.#url = 'https://woorden.org/woord/' + this.word
     }
     
     set word (value) {

@@ -1,5 +1,5 @@
 /**
- * Converter module.
+ * Converter module. Converts an array of strings into an object with all available key and value pairs for a word.
  *
  * @author Emma Fransson <info@emmbryo.se>
  * @version 1.0.0
@@ -7,13 +7,18 @@
 
 export class Converter {
 
+  /**
+   * 
+   * @param {String[]} toBeConverted 
+   * @returns {Object}
+   */
   convertWordInfo(toBeConverted) {
-    const separatedValues =  this.separateKeysAndValues(toBeConverted)
-    const wordInfoObject = this.toObject(separatedValues)
+    const separatedValues =  this.#separateKeysAndValues(toBeConverted)
+    const wordInfoObject = this.#toObject(separatedValues)
     return wordInfoObject
   }
 
-  separateKeysAndValues(toBeSeparated) {
+  #separateKeysAndValues(toBeSeparated) {
     let separatedValues = []
     for (let i = 0; i < toBeSeparated.length; i++) {
       if (toBeSeparated[i].includes("Uitspraak:")) {
@@ -41,6 +46,18 @@ export class Converter {
     return separatedValues
   }
 
+  #toObject (toBeConverted) {
+
+    for (let i = 0; i < toBeConverted.length; i++) {
+      this.#trimArray(toBeConverted[i])
+    }
+
+    let objectAsStrings = this.#buildConvertableString(toBeConverted)
+
+    let objectAsString = objectAsStrings.join(",")
+    return this.#convertWithJSONparse(objectAsString)
+  }
+
   #checkForDuplicatedKeys (separatedValues) {
     const indexOfKey = 0
     const indexOfValue = 2
@@ -55,18 +72,11 @@ export class Converter {
     const indexOfValue = 2
     for (let i = 0; i < separatedValues.length; i++) {
       separatedValues[i][indexOfValue] = separatedValues[i][indexOfValue].replaceAll('  ', ' ')
-      console.log(separatedValues[i][indexOfValue])
       separatedValues[i][indexOfValue] = separatedValues[i][indexOfValue].replaceAll('`', '')
-      console.log(separatedValues[i][indexOfValue])
     }
   }
 
-  toObject (toBeConverted) {
-
-    for (let i = 0; i < toBeConverted.length; i++) {
-      this.trimArray(toBeConverted[i])
-    }
-
+  #buildConvertableString (toBeConverted) {
     let objectAsStrings = []
     objectAsStrings.push("{")
     for (let i = 0; i < toBeConverted.length; i++) {
@@ -78,12 +88,19 @@ export class Converter {
     let stringHolderEnd = objectAsStrings[objectAsStrings.length - 1] + "}"
     objectAsStrings.push(stringHolderEnd)
 
-    let objectAsString = objectAsStrings.join(",")
-    console.log(objectAsString)
-    return JSON.parse(objectAsString)
+    return objectAsStrings
   }
 
-  trimArray (toBeTrimmed) {
+  #convertWithJSONparse (toBeParsed) {
+    try {
+      const parsedString = JSON.parse(toBeParsed)
+      return parsedString
+    } catch (error) {
+      throw new Error('There was no information about the chosen word, please check the spelling or make sure it is a dutch word.')
+    }
+  }
+
+  #trimArray (toBeTrimmed) {
     for (let i = 0; i < toBeTrimmed.length; i++) {
       toBeTrimmed[i] = toBeTrimmed[i].trim()
     }
