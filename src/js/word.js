@@ -23,6 +23,11 @@ export class Word {
    */
   #url
 
+  /**
+   * When initiating an object of type word, the word is set as a private field and the url is generated.
+   *
+   * @param {string} word 
+   */
     constructor (word) {
       this.word = word
       this.#setUrl()
@@ -44,7 +49,7 @@ export class Word {
 
     /**
      * 
-     * @returns {String[]} 
+     * @returns {String[] / string} All available expressions for the word. If none, it returns a string with error message.
      */
     async getExpressions () {
       const dom = await this.#getDom()
@@ -55,6 +60,10 @@ export class Word {
 
     }
 
+    /**
+     * 
+     * @returns {String[] / string} All available synonyms for the word. If none, it returns a string with error message.
+     */
     async getSynonyms () {
       const dom = await this.#getDom()
       const allLinksTextContent = this.#getLinksTextContent(dom)
@@ -64,6 +73,10 @@ export class Word {
       return this.#hasElements(synonyms, errorMessage)
     }
 
+    /**
+     * 
+     * @returns {String[] / string} All available antonyms for the word. If none, it returns a string with error message.
+     */
     async getAntonyms () {
       const dom = await this.#getDom()
       const allLinksTextContent = this.#getLinksTextContent(dom)
@@ -74,6 +87,10 @@ export class Word {
 
     }
 
+    /**
+     * 
+     * @returns {String[] / string} All available synonym links for the word. If none, it returns a string with error message.
+     */
     async getSynonymLinks () {
       const dom = await this.#getDom()
       const allLinksTextContent = this.#getLinksTextContent(dom)
@@ -85,6 +102,10 @@ export class Word {
 
     }
 
+    /**
+     * 
+     * @returns {String[] / string} All available expression links for the word. If none, it returns a string with error message.
+     */
     async getExpressionLinks () {
       const dom = await this.#getDom()
       const expressionLinks = this.#getLinksForExpressions(dom)
@@ -93,6 +114,9 @@ export class Word {
       return this.#hasElements(expressionLinks, errorMessage)
 
     }
+
+
+    // Private methods only used within the class.
 
     async #getDom () {
       const response = await this.#getInfo()

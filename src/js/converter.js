@@ -18,6 +18,8 @@ export class Converter {
     return wordInfoObject
   }
 
+  // Private methods that are only used within the class.
+
   #separateKeysAndValues(toBeSeparated) {
     let separatedValues = []
     for (let i = 0; i < toBeSeparated.length; i++) {
