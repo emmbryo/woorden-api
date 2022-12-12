@@ -59,6 +59,9 @@
   <tr>
     <td><b>#getInfo()</b></td>
     <td>10</td>
-    <td>Också en kortare metod, bra storlek. Den tar inga argument, vilket förenklar och är det optimala antalet argument enligt regeln gällande <b>Function Arguments.</b> Metoden gör ett nätverksanrop, kontrollerar att det kommer ett svar och returnerar sedan detta svar. Dessa steg är tätt sammanlänkade, men det kan tolkas som att metoden bryter mot <b>Do One Thing.</b></td>
+    <td>Också en kortare metod, enligt <b>Small!</b>. Den tar inga argument, vilket förenklar och är det optimala antalet argument enligt regeln gällande <b>Function Arguments.</b> Metoden gör ett nätverksanrop, kontrollerar att det kommer ett svar och returnerar sedan detta svar. Dessa steg är tätt sammanlänkade, men det kan tolkas som att metoden bryter mot <b>Do One Thing.</b></td>
   </tr>
 </table>
+
+## Kommentarer
+En väldigt nyttig övning. Speciellt gällande funktionerna där man fick sig en riktig tankeställare. Även om man trott att man följt de flesta av reglerna inser man nu att det finns många förbättringar som kan göras. Det var en bra approach att ta de längsta funtionerna i modueln eftersom chanserna att hitta intressanata konstruktioner ökar, något som gav resultat! Den här genomgången kommer definitivt att få undertecknad att tänka till vid kommande programmering. Sen måste man tillåta sig att vara kreativ och gå lite bananas ibland, men att öka medvetenheten kring koden man skapar är verkligen bra och denna övning har definitivt bidragit till det.

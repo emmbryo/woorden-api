@@ -24,8 +24,7 @@ In the code itself, the module makes use of asynchronous code and therefore need
 
 This code will result in the following print to the console:
 
-![belangrijk object](/img/belangrijk_objekt.jpeg)
-
+![belangrijk object](/img/belangrijk_objekt.jpeg)<br>
 
 ## Methods
 
@@ -68,5 +67,6 @@ getExpressionLinks()
 </h3>
 The method returns an array containing links (urls) to the given expressions, if there are any available at woorden.org. If no expression links can be found, the following message is returned: "woorden.org offers no expression links for the word [word]."
 
-## Disclaimer
-This package has been tested for a variety of different words, but far from all words in the dutch language have been used. Because of this, there is a risk that the underlying structure of woorden.org will not be 100% consistent for all the words which might affect the performance of the methods provided here.
+<br>
+<h2 style="color:rgb(255, 140, 160)">Disclaimer</h2>
+<p style="color:rgb(255, 140, 160)">This package has been tested for a variety of different words, but far from all words in the dutch language have been used. Because of this, there is a risk that the underlying structure of woorden.org will not be 100% consistent for all the words which might affect the performance of the methods provided here.</p>
