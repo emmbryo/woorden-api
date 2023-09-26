@@ -16,20 +16,31 @@ describe('Word constructor', () => {
   })
 })
 
-describe('Method: getWordInfo', () => {
-  describe('return value', () => {
+function methodReturnTest(testName, method) {
+  describe(testName, () => {
+    describe('return value', () => {
+  
+      test('Method should return an object', async () => {
+        const response = await method
+        expect(typeof response).toBe('object')
+      })
 
-    test('method should return an object', async () => {
-      const info = await word.getWordInfo()
-      expect(typeof info).toBe('object')
-    })
-    test('All keys should be of type string', async () => {
-      const info = await word.getWordInfo()
-      const values = Object.values(info)
-      values.forEach((value) => {
-        console.log(value)
-        expect(typeof value).toBe('string')
+      test('All values should be of type string', async () => {
+        let response = await method
+        if (!Array.isArray(response)) {
+          response = Object.values(response)
+        }
+        response.forEach((value) => {
+          expect(typeof value).toBe('string')
+        })
       })
     })
   })
-})
+}
+
+methodReturnTest('Method: getWordInfo', word.getWordInfo())
+methodReturnTest('Method: getAntonyms', word.getAntonyms())
+methodReturnTest('Method: getSynonyms', word.getSynonyms())
+methodReturnTest('Method: getSynonymLinks', word.getSynonymLinks())
+methodReturnTest('Method: getExpressions', word.getExpressions())
+methodReturnTest('Method: getExpressionLinks', word.getExpressionLinks())

@@ -5,7 +5,7 @@
  * @version 1.0.0
  */
 import { JSDOM } from "jsdom"
-import { Converter } from "./converter.js"
+import Converter from "./converter.js"
 
 export default class Word {
   /**
