@@ -1,5 +1,7 @@
 // test code for all public methods for the Word class.
-import { Word } from "../src/js/word.js"
+
+// @ts-ignore
+import { Word } from "../src/js/index.js"
 
 const word = new Word('belangrijk')
 
