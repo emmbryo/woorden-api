@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "npx --node-options=--experimental-vm-modules jest --verbose --coverage || exit 0",
+    "test:only": "npx --node-options=--experimental-vm-modules jest -t",
     "start": "node src/index.js"
   },
   "keywords": [
