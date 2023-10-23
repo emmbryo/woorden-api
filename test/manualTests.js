@@ -1,7 +1,7 @@
 // test code for all public methods for the Word class.
 
 // @ts-ignore
-import Word from "../src/js/index.js"
+import { Word } from "../src/js/index.js"
 
 const word = new Word('belangrijk')
 
@@ -9,7 +9,7 @@ const word = new Word('belangrijk')
 async function getWordInfo () {
 
     const infoString = await word.getWordInfo()
-    console.log(infoString)
+    console.table(infoString)
 
     const expressions =  await word.getExpressions()
     console.log(expressions)
