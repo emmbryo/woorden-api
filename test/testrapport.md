@@ -63,28 +63,28 @@ Initiating an object of the class Word with an input that is not a dutch word, o
 
 ### 2.1
 Here, use the word *belangrijk* (*eng. important*). Search for the word at woorden.org to obtain the following info:
-![belangrijk](/img/belangrijk_woorden.png)
+![belangrijk](./img/belangrijk_woorden.png)
 Compare the info presented on woorden.org with what the methods in the word class returns.
 
 #### 2.1.1
 Calling the method <span style="color:#FFFF99">getWordInfo()</span>
 Should give the following result:
-![belangrijk](/img/belangrijk_objekt.jpeg)
+![belangrijk](./img/belangrijk_objekt.jpeg)
 
 #### 2.1.2
 Calling the method <span style="color:#FFFF99">getSynonyms()</span>
 Should give the following result:
-![belangrijk](/img/belangrijk_syn.jpeg)
+![belangrijk](./img/belangrijk_syn.jpeg)
 
 #### 2.1.3
 Calling the method <span style="color:#FFFF99">getAntonyms()</span>
 Should give the following result:
-![belangrijk](/img/belangrijk_ant.jpeg)
+![belangrijk](./img/belangrijk_ant.jpeg)
 
 #### 2.1.3
 Calling the method <span style="color:#FFFF99">getExpressions()</span>
 Should give the following result:
-![belangrijk](/img/belangrijk_expressions.jpeg)
+![belangrijk](./img/belangrijk_expressions.jpeg)
 
 ### 2.2
 The steps of comparison done in 2.1 are repeated for a list of different words, belonging to different categories. A successful test shows the same parameters as given on woorden.org. If a parameter for the word is not available at woorden.org, the method should return a message informing the user about this. This is also counted as a successful result.
