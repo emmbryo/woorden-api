@@ -1,6 +1,6 @@
-# Testing of the module
+# Testing of the module - Manual and Unit tests
 
-## Test 1
+## Manual tests
 ### 1.1
 Initiating an object of the class Word with an empty string should result in a RangeError: *Input must be between 1 and 35 characters long.*
 
@@ -159,3 +159,10 @@ It is not possible to test for all existing words in the dutch language, but by 
 It can only be made sure that the methods returns the appropriate error when information is not found, This has been tested for both valid and invalid input.
 
 <h3 style="color:rgb(255, 140, 160)"> Just because the tests performed here all gave the expected result, that doesn't guarantee that it will work for every single word.</h3>
+
+## Unit tests
+### Result
+<img src="./img/unit_tests_result.png">
+
+### Verbose
+<img src="./img/unit_tests_verbose.png">
