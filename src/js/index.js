@@ -7,7 +7,7 @@
 import { JSDOM } from "jsdom"
 import Converter from "./converter.js"
 
-export default class Word {
+export class Word {
   /**
    * The word to search for.
    *
