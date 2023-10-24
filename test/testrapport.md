@@ -158,11 +158,12 @@ It is not possible to test for all existing words in the dutch language, but by 
 
 It can only be made sure that the methods returns the appropriate error when information is not found, This has been tested for both valid and invalid input.
 
-<h3 style="color:rgb(255, 140, 160)"> Just because the tests performed here all gave the expected result, that doesn't guarantee that it will work for every single word.</h3>
-
 ## Unit tests
 ### Result
 <img src="./img/unit_tests_result.png">
 
 ### Verbose
 <img src="./img/unit_tests_verbose.png">
+
+## Disclaimer
+<h3 style="color:rgb(255, 140, 160)"> Just because the tests performed here all gave the expected result, that doesn't guarantee that it will work for every single word.</h3>
